@@ -21,15 +21,11 @@ class betterstorehr {
     public $fri_e;
     public $sat_e;
     public $sun_e;
-    public $n;
+    public $n = 0;
     public $arr_spe_reason = array();
-    public $arr_spe_type = array();
     public $arr_spe_start = array();
     public $arr_spe_end = array();
-    
-    function getmytimezone() {
-    $this->n = 0;
-}
+    public $cause = array();
     function register_time_start($mon_r,$tue_r,$wed_r,$thu_r,$fri_r,$sat_r,$sun_r)
     {
        $this->mon = $mon_r;
@@ -50,9 +46,8 @@ class betterstorehr {
        $this->sat_e = $sat_r;
        $this->wed_e = $sun_r;
     }
-    function add_special_day($reason,$type,$start,$end) {
+    function add_special_day($reason,$end,$start) {
         $this->arr_spe_reason[$this->n] = $reason;
-        $this->arr_spe_type[$this->n] = $type;
         $this->arr_spe_start[$this->n] = $start;
         $this->arr_spe_end[$this->n] = $end;
         $this->n += 1;
@@ -100,12 +95,31 @@ class betterstorehr {
   
   $today = date("g", strtotime("13:30"));
   $range = range($day, $endday);
-  if(in_array($today, $range)){
+  $y = 0;
+  $c = 0;
+  foreach ($this->arr_spe_start as $itwo)
+  {
+         $currentc = $c;
+      $ione = $this->arr_spe_end[$c];
+      $c +=1;
+     $my = $today;
+      $rangea_A = range($ione,$itwo);
+if (in_array($today,$rangea_A))
+{
+    $y +=1;
+    $this->cause[$currentc] = $this->arr_spe_reason[$currentc];
+}
+      }
+  if(in_array($today, $range) && $y == 0){
       return true;
   } else {
       return false;
   }
 }
+function get_todays_events() {
+    return $this->cause;
 }
+}
+
 
 ?>
