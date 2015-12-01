@@ -14,4 +14,5 @@ foreach ($new_clock->get_todays_events() as $event)
 {
     echo $event;
 }
+echo " and the time is " .$new_clock->get_todays_clock() . ".";
 ?>

@@ -26,6 +26,7 @@ class betterstorehr {
     public $arr_spe_start = array();
     public $arr_spe_end = array();
     public $cause = array();
+    public $today;
     function register_time_start($mon_r,$tue_r,$wed_r,$thu_r,$fri_r,$sat_r,$sun_r)
     {
        $this->mon = $mon_r;
@@ -93,7 +94,8 @@ class betterstorehr {
       
   }
   
-  $today = date("g", strtotime("13:30"));
+  $today = date("g", strtotime(date('H:i')));
+    $this->today = date("g:i a", strtotime(date('H:i')));
   $range = range($day, $endday);
   $y = 0;
   $c = 0;
@@ -118,6 +120,9 @@ if (in_array($today,$rangea_A))
 }
 function get_todays_events() {
     return $this->cause;
+}
+function get_todays_clock() {
+    return $this->today;
 }
 }
 
